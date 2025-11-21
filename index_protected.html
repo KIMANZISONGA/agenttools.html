@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KIMANZI Agent Tools</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  <style>
+    body { padding: 2rem; }
+    section { margin-bottom: 3rem; }
+    .centered {
+      max-width: 400px;
+      margin: 5rem auto;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container centered" id="loginSection">
+    <h1>🔒 KIMANZI Agent Tools</h1>
+    <p>Deze omgeving is alleen voor KIMANZI agents.</p>
+    <form onsubmit="checkPassword(event)">
+      <label for="password">
+        Wachtwoord
+        <input type="password" id="password" required autocomplete="current-password">
+      </label>
+      <button type="submit">Inloggen</button>
+      <small id="loginError" style="color: #e00;"></small>
+    </form>
+  </main>
+
+  <main class="container" id="protectedContent" style="display: none;">
+    <h1>👤 KIMANZI Agent Tools</h1>
+    <p>This dashboard is for internal use only.</p>
+  </main>
+
+  <script>
+    const DASHBOARD_PASSWORD = "kimanzi-agents-only";
+    function checkPassword(event) {
+      event.preventDefault();
+      const input = document.getElementById('password').value.trim();
+      const error = document.getElementById('loginError');
+      if (input === DASHBOARD_PASSWORD) {
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('protectedContent').style.display = 'block';
+      } else {
+        error.textContent = "Onjuist wachtwoord.";
+      }
+    }
+  </script>
+</body>
+</html>
