@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KIMANZI Agent Tools</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  <style>
+    body { padding: 2rem; }
+    section { margin-bottom: 3rem; }
+  </style>
+</head>
+<body>
+<main class="container">
+  <h1>👤 KIMANZI Agent Tools</h1>
+  <p>This dashboard is for internal use only.</p>
+
+  <!-- Confirmation -->
+  <section>
+    <h2>📨 Send confirmation email</h2>
+    <form onsubmit="openConfirmationEmail(); return false;">
+      <input type="email" id="emailConfirmation" placeholder="Agent's email address" required>
+      <button type="submit">Open mail client</button>
+    </form>
+  </section>
+
+  <!-- Onboarding -->
+  <section>
+    <h2>🚀 Send onboarding email</h2>
+    <form onsubmit="openOnboardingEmail(); return false;">
+      <input type="email" id="emailOnboarding" placeholder="Agent's email address" required>
+      <button type="submit">Open mail client</button>
+    </form>
+  </section>
+
+  <!-- Agreement -->
+  <section>
+    <h2>✍️ Send agreement</h2>
+    <form onsubmit="openAgreementEmail(); return false;">
+      <input type="email" id="emailAgreement" placeholder="Agent's email address" required>
+      <button type="submit">Open mail client</button>
+    </form>
+  </section>
+
+  <!-- Intake reminder -->
+  <section>
+    <h2>🔔 Send intake reminder</h2>
+    <form onsubmit="openReminderEmail(); return false;">
+      <input type="email" id="emailReminder" placeholder="Agent's email address" required>
+      <button type="submit">Open mail client</button>
+    </form>
+  </section>
+</main>
+
+<script>
+  function openConfirmationEmail() {
+    const email = document.getElementById('emailConfirmation').value;
+    const subject = encodeURIComponent("Confirmation of your KIMANZI application");
+    const body = encodeURIComponent("Hi,\n\nThank you for your application to become a KIMANZI agent.\nWe will personally follow up with you shortly.\n\nBest regards,\nThe KIMANZI team");
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  }
+
+  function openOnboardingEmail() {
+    const email = document.getElementById('emailOnboarding').value;
+    const subject = encodeURIComponent("Welcome to KIMANZI — onboarding");
+    const body = encodeURIComponent("Hi,\n\nWelcome to KIMANZI!\nPlease find the onboarding document attached. If you have any questions, feel free to reach out.\n\nLooking forward to working with you.\n\nBest regards,\nThe KIMANZI team");
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  }
+
+  function openAgreementEmail() {
+    const email = document.getElementById('emailAgreement').value;
+    const subject = encodeURIComponent("KIMANZI Collaboration Agreement");
+    const body = encodeURIComponent("Hi,\n\nBelow is the link to your agreement as an agent for KIMANZI.\nPlease review it carefully and let us know once you agree.\n\n🔗 https://drive.proton.me/urls/placeholder-link\n\nBest regards,\nThe KIMANZI team");
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  }
+
+  function openReminderEmail() {
+    const email = document.getElementById('emailReminder').value;
+    const subject = encodeURIComponent("Reminder following your intake");
+    const body = encodeURIComponent("Hi,\n\nJust a quick reminder following our intake conversation.\nIf you have any questions or still need to complete any steps, feel free to get in touch.\n\nBest regards,\nThe KIMANZI team");
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  }
+</script>
+</body>
+</html>
