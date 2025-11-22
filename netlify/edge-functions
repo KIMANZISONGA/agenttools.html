@@ -3,7 +3,9 @@ export default async (request, context) => {
 
   const username = "stephen";
   const password = "kimanzi-agents-only";
-  const expected = "Basic " + btoa(`${username}:${password}`);
+
+  // Fix: btoa() werkt niet in Edge Functions → Buffer gebruiken
+  const expected = "Basic " + Buffer.from(`${username}:${password}`).toString("base64");
 
   if (auth !== expected) {
     return new Response("Authentication required", {
