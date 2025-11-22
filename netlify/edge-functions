@@ -1,20 +1,23 @@
 export default async (request, context) => {
-  const auth = request.headers.get("authorization");
+  // Check Authorization header
+  const authHeader = request.headers.get("authorization");
 
   const username = "stephen";
   const password = "kimanzi-agents-only";
 
-  // Fix: btoa() werkt niet in Edge Functions → Buffer gebruiken
+  // Correct Base64 encoding in Edge Functions
   const expected = "Basic " + Buffer.from(`${username}:${password}`).toString("base64");
 
-  if (auth !== expected) {
+  // No or invalid credentials → require login
+  if (authHeader !== expected) {
     return new Response("Authentication required", {
       status: 401,
       headers: {
-        "WWW-Authenticate": 'Basic realm="Kimanzi Agent Tools"'
+        "WWW-Authenticate": 'Basic realm="Kimanzi Agent Tools"',
       }
     });
   }
 
+  // Valid credentials → continue to site
   return context.next();
 };
