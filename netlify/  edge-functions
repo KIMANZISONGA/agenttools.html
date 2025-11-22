@@ -1,13 +1,7 @@
 export default async (request, context) => {
   const authHeader = request.headers.get("authorization");
 
-  const username = "stephen";
-  const password = "kimanzi-agents-only";
-
-  // Base64 in Deno
-  const encoder = new TextEncoder();
-  const data = encoder.encode(`${username}:${password}`);
-const expected = "Basic c3RlcGhlbjprYW1hbnppLWFnZW50cy1vbmx5";
+  const expected = "Basic c3RlcGhlbjprYW1hbnppLWFnZW50cy1vbmx5";
 
   if (authHeader !== expected) {
     return new Response("Authentication required", {
