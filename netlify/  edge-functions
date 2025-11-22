@@ -1,22 +1,7 @@
-export default async (request, context) => {
-  const authHeader = request.headers.get("authorization");
-
-  const username = "stephen";
-  const password = "kimanzi-agents-only";
-
-  // Base64 in Deno
-  const encoder = new TextEncoder();
-  const data = encoder.encode(`${username}:${password}`);
-  const expected = "Basic " + btoa(String.fromCharCode(...data));
-
-  if (authHeader !== expected) {
-    return new Response("Authentication required", {
-      status: 401,
-      headers: {
-        "WWW-Authenticate": 'Basic realm="Kimanzi Agent Tools"'
-      }
-    });
+{
+  "functions": {
+    "auth": {
+      "path": "/*"
+    }
   }
-
-  return context.next();
-};
+}
